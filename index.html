@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opt-Out CSS</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    </script>
+    <script src="theme.js" defer></script>
+  </head>
+  <body>
+    <main class="content-grid">
+      <!-- Header -->
+      <header class="full-width sticky-top dark-top-header">
+        <nav class="navbar full-width">
+          <div class="left"><a href="#" class="symbol">Brand</a></div>
+          <div class="middle"></div>
+          <div class="right">
+            <ul class="nav-links">
+              <li><a href="#" class="subtle-link">Home</a></li>
+              <li><a href="#" class="subtle-link">About</a></li>
+              <li><a href="#" class="subtle-link">Contact</a></li>
+            </ul>
+            <button type="button" id="theme-toggle" class="subtle-link" aria-label="Toggle dark mode">
+              <svg
+                id="dark-theme-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-moon-icon lucide-moon"
+              >
+                <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+              </svg>
+              <svg
+                id="light-theme-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-sun-icon lucide-sun"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="m6.34 17.66-1.41 1.41" />
+                <path d="m19.07 4.93-1.41 1.41" />
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Hero Section -->
+      <section class="section-padding full-width">
+        <div class="content-grid flow">
+          <div class="flow" style="--flow-spacing: 1.5rem">
+            <h1 style="line-height: 1.1">Crafting Modern Digital Experiences</h1>
+            <p style="color: var(--text-muted)">Discover a refined approach to web design built on robust primitives, seamless dark mode adaptation, and fluid layouts.</p>
+          </div>
+          <div class="breakout">
+            <img class="full-width" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Abstract fluid design system art" />
+          </div>
+        </div>
+      </section>
+
+      <!-- About / Features Section -->
+      <section class="section-padding alternate full-width">
+        <div class="content-grid flow">
+          <div class="flow">
+            <h2>Built with Precision</h2>
+            <p style="color: var(--text-muted)">Every element is carefully structured using modern CSS layout patterns like subgrid breakouts and dynamic fluid typography.</p>
+          </div>
+
+          <div class="responsive-flexbox-layout" style="--responsive-flexbox-layout-item-min-width: 25ch">
+            <div class="flow" style="background-color: var(--section-bg-color); padding: 1.5rem; border-radius: 0.5rem">
+              <h3>Primitives</h3>
+              <p style="color: var(--text-muted)">Raw design tokens providing flexible scales for typography, spacing, and a comprehensive neutral color palette.</p>
+            </div>
+            <div class="flow" style="background-color: var(--section-bg-color); padding: 1.5rem; border-radius: 0.5rem">
+              <h3>Semantics</h3>
+              <p style="color: var(--text-muted)">Context-aware themes utilizing modern color functions like <code>light-dark()</code> for seamless user preference switching.</p>
+            </div>
+            <div class="flow" style="background-color: var(--section-bg-color); padding: 1.5rem; border-radius: 0.5rem">
+              <h3>Layouts</h3>
+              <p style="color: var(--text-muted)">Advanced grid configurations empowering full-width breakouts and responsive flexbox wrapping behaviors effortlessly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery / Showcase Section -->
+      <section class="section-padding full-width">
+        <div class="content-grid flow">
+          <div class="flow">
+            <h2>Visual Harmony</h2>
+            <p style="color: var(--text-muted)">A glimpse into how elements coexist within the strict boundaries of our content grid structure.</p>
+          </div>
+
+          <div class="breakout responsive-flexbox-layout" style="--responsive-flexbox-layout-item-min-width: 30ch">
+            <div class="flow">
+              <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="Workspace setup" />
+              <h4>Minimal Workspaces</h4>
+              <p style="color: var(--text-muted)">Clean aesthetics designed to enhance focus and minimize visual noise.</p>
+            </div>
+            <div class="flow">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Collaborative team environment" />
+              <h4>Collaborative Flow</h4>
+              <p style="color: var(--text-muted)">Built for teams scaling modern products across multiple platforms.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

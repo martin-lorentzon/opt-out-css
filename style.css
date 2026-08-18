@@ -1,0 +1,541 @@
+/* ==========================================================================
+   MARK: ✒️ Design Tokens
+   Primitives (Raw Palette)
+   ========================================================================== */
+:root {
+  /* Font Families */
+  /* Src: Modern Font Stacks https://github.com/system-fonts/modern-font-stacks */
+  --ff-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+
+  /* Font Sizes & Spaces */
+  /* Credit: James Gilyead, Trys Mudford https://utopia.fyi/ */
+  /* 9 shades (6 above base), 320px -> 1440px, base 16px -> 20px, ratio 1.2 -> 1.333 */
+  --font-size-xs: clamp(0.6944rem, 0.6919rem + 0.0129vw, 0.7035rem); /* 11.1px -> 11.3px */
+  --font-size-sm: clamp(0.8333rem, 0.8035rem + 0.1491vw, 0.9377rem); /* 13.3px -> 15.0px */
+  --font-size-base: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem); /* 16.0px -> 20.0px */
+  --font-size-lg: clamp(1.2rem, 1.0668rem + 0.6661vw, 1.6663rem); /* 19.2px -> 26.7px */
+  --font-size-xl: clamp(1.44rem, 1.2168rem + 1.1159vw, 2.2211rem); /* 23.0px -> 35.5px */
+  --font-size-2xl: clamp(1.728rem, 1.3758rem + 1.7611vw, 2.9607rem); /* 27.6px -> 47.4px */
+  --font-size-3xl: clamp(2.0736rem, 1.5384rem + 2.6758vw, 3.9467rem); /* 33.2px -> 63.1px */
+  --font-size-4xl: clamp(2.4883rem, 1.6962rem + 3.9608vw, 5.2609rem); /* 39.8px -> 84.2px */
+  --font-size-5xl: clamp(2.986rem, 1.8355rem + 5.7526vw, 7.0128rem); /* 47.8px -> 112.2px */
+
+  --space-3xs: clamp(0.25rem, 0.2321rem + 0.0893vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4643rem + 0.1786vw, 0.625rem);
+  --space-xs: clamp(0.75rem, 0.6964rem + 0.2679vw, 0.9375rem);
+  --space-s: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+  --space-m: clamp(1.5rem, 1.3929rem + 0.5357vw, 1.875rem);
+  --space-l: clamp(2rem, 1.8571rem + 0.7143vw, 2.5rem);
+  --space-xl: clamp(3rem, 2.7857rem + 1.0714vw, 3.75rem);
+  --space-2xl: clamp(4rem, 3.7143rem + 1.4286vw, 5rem);
+  --space-3xl: clamp(6rem, 5.5714rem + 2.1429vw, 7.5rem);
+
+  /* Colors */
+  /* Credit: Jeremy Sallée https://sds.sallee.design/palette-maker */
+  /* 10 stops, arctan, no chroma, L Min = 15, L Max = 97 */
+  --gray-50: oklch(97.02% 0 0);
+  --gray-100: oklch(94.61% 0 0);
+  --gray-200: oklch(90.97% 0 0);
+  --gray-300: oklch(85.76% 0 0);
+  --gray-400: oklch(76.99% 0 0);
+  --gray-500: oklch(63.01% 0 0);
+  --gray-600: oklch(45.32% 0 0);
+  --gray-700: oklch(30.52% 0 0);
+  --gray-800: oklch(20.9% 0 0);
+  --gray-900: oklch(14.96% 0 0);
+}
+
+/* ==========================================================================
+   Design Tokens — Semantic / Theme (Applied Context)
+   ========================================================================== */
+:root {
+  /* Body */
+  --body-bg-color: light-dark(var(--gray-50), var(--gray-900));
+
+  /* Sections */
+  --section-bg-color: light-dark(var(--gray-50), var(--gray-900));
+  --section-alternate-bg-color: light-dark(var(--gray-100), var(--gray-800));
+
+  /* Text */
+  --text-primary: light-dark(var(--gray-900), var(--gray-50));
+  --text-muted: light-dark(var(--gray-500), var(--gray-400));
+
+  /* Buttons */
+  --button-bg-color: transparent;
+}
+
+/* ==========================================================================
+   MARK: ✍️ Typography
+   ========================================================================== */
+:root {
+  /* Body */
+  --body-font-family: var(--ff-neo-grotesque);
+
+  /* Navigation Bar */
+  --navbar-font-family: var(--ff-neo-grotesque);
+}
+
+body {
+  font-family: var(--body-font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.02em;
+  scroll-margin-top: 5rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: var(--font-size-5xl);
+}
+h2 {
+  font-weight: 600;
+  font-size: var(--font-size-4xl);
+}
+h3 {
+  font-weight: 600;
+  font-size: var(--font-size-3xl);
+}
+h4 {
+  font-weight: 600;
+  font-size: var(--font-size-2xl);
+}
+h5 {
+  font-weight: 600;
+  font-size: var(--font-size-xl);
+}
+h6 {
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.navbar {
+  font-family: var(--navbar-font-family);
+}
+
+/* ==========================================================================
+   MARK: ✨ Component Defaults 
+   Single-consumer, tunable via matching local var
+   ========================================================================== */
+:root {
+  /* Layout */
+  --content-grid-padding-inline: var(--space-s);
+  --content-grid-content-max-width: 900px;
+  --content-grid-breakout-max-width: 1200px;
+
+  --flow-spacing: var(--space-s);
+
+  --section-padding-block: var(--space-l); /* Vertical padding inside sections (only if applied) */
+
+  --responsive-flexbox-layout-gap: var(--space-s);
+  --responsive-flexbox-layout-item-min-width: 10ch;
+
+  /* Navigation Bar */
+  --navbar-padding-inline: var(--space-s);
+  --navbar-padding-block: var(--space-s);
+  --navbar-group-gap: var(--space-m);
+  --navbar-links-gap: var(--space-m);
+
+  /* Images */
+  --symbol-image-height: 25vh;
+  --symbol-image-padding-inline: var(--space-s);
+  --symbol-image-padding-block: var(--space-s);
+
+  --hero-image-max-height: 45vh;
+
+  /* Icons */
+  --icon-size: 1.125em;
+  --icon-stroke-width: 2;
+
+  /* Buttons */
+  --button-padding-inline: 0;
+  --button-padding-block: 0;
+}
+
+/* ==========================================================================
+   MARK: ♻️ Reset
+   ========================================================================== */
+/* Credit: Kevin Powell https://codepen.io/kevinpowell/pen/QWxBgZX
+                        https://www.youtube.com/watch?v=qI5rXLJnxco */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0; /* remove default spacing */
+  padding: 0;
+  font: inherit; /* force styling of type through styling, rather than elements */
+}
+
+html {
+  scrollbar-gutter: stable; /* Reserves space for the scrollbar to prevent layout shifts */
+
+  container-type: scroll-state;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:root {
+  color-scheme: light dark; /* dark mode user-agent-styles */
+  interpolate-size: allow-keywords; /* Allows transitioning to auto for example */
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  min-block-size: 100svh; /* min body height */
+}
+
+/* Credit: Harry Roberts https://x.com/csswizardry/status/1717841334462005661 */
+img,
+video {
+  background-image: var(--low-res, none);
+
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 0.75rem;
+}
+
+/* Credit: Stephanie Eckles https://css-tricks.com/standardizing-focus-styles-with-css-custom-properties/ */
+:is(a, button, input, textarea, summary) {
+  --outline-size: max(2px, 0.08em);
+  --outline-style: solid;
+  --outline-color: CanvasText;
+}
+
+:is(a, button, input, textarea, summary):focus {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, textarea, summary):focus-visible {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, textarea, summary):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+  background-color: var(--body-bg-color);
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-primary);
+}
+
+section {
+  background-color: var(--section-bg-color);
+  background-size: cover;
+  background-position: center;
+}
+
+section.alternate {
+  background-color: var(--section-alternate-bg-color);
+}
+
+a {
+  color: var(--text-primary);
+}
+
+.subtle-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.2s ease-in-out;
+}
+
+.subtle-link:hover {
+  color: var(--text-primary);
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  background-color: var(--button-bg-color);
+  border: none;
+  cursor: pointer;
+}
+
+/* Icon-button-specific Layout */
+button:has(> svg) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+/* Theme Toggle Icon */
+#dark-theme-icon,
+#light-theme-icon {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) #dark-theme-icon {
+    display: block;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) #light-theme-icon {
+    display: block;
+  }
+}
+
+:root[data-theme="light"] #dark-theme-icon {
+  display: block;
+}
+:root[data-theme="dark"] #light-theme-icon {
+  display: block;
+}
+
+/* Use for logos or items that must not be cropped */
+img.symbol {
+  object-fit: contain;
+  background-size: contain;
+  height: var(--symbol-image-height);
+  padding-inline: var(--symbol-image-padding-inline);
+  padding-block: var(--symbol-image-padding-block);
+}
+
+img.full-width {
+  object-fit: cover;
+  width: 100%;
+  max-height: var(--hero-image-max-height);
+}
+
+:where(.icon, [class^="icon-"], [class*=" icon-"], [class$="-icon"], [class*="-icon "]) {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  stroke-width: var(--icon-stroke-width);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: var(--navbar-padding-inline);
+  padding-block: var(--navbar-padding-block);
+}
+
+.left {
+  display: inline-flex;
+  flex: 1;
+  justify-content: flex-start;
+  gap: var(--navbar-group-gap);
+}
+
+.center {
+  display: inline-flex;
+  justify-content: center;
+  gap: var(--navbar-group-gap);
+}
+
+.right {
+  display: inline-flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: var(--navbar-group-gap);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: var(--navbar-links-gap);
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Hamburger Menu for Mobile Devices */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--hamburger-line-gap);
+  width: var(--hamburger-icon-size);
+  height: var(--hamburger-icon-size);
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.hamburger-line {
+  height: var(--hamburger-line-thickness);
+  background-color: currentColor;
+  border-radius: 999px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+/* Animates the burger into a cross once the button reports itself open */
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: translateY(calc(var(--hamburger-line-gap) + var(--hamburger-line-thickness))) rotate(45deg);
+}
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: translateY(calc(-1 * (var(--hamburger-line-gap) + var(--hamburger-line-thickness)))) rotate(-45deg);
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  gap: var(--hamburger-menu-gap);
+  padding-inline: var(--hamburger-menu-padding-inline);
+  padding-block: var(--hamburger-menu-padding-block);
+  background-color: var(--hamburger-menu-bg-color);
+}
+.hamburger-menu-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--hamburger-menu-gap);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: inline-flex;
+  }
+  .hamburger-menu:not([hidden]) {
+    display: flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hamburger-line {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   MARK: 🪛 Layout & Utilities
+   ========================================================================== */
+/* Credit: Kevin Powell https://codepen.io/kevinpowell/pen/ExrZrrw
+           Stephanie Eckles https://smolcss.dev/#smol-breakout-grid */
+.content-grid {
+  --padding-inline: var(--content-grid-padding-inline);
+  --content-max-width: var(--content-grid-content-max-width);
+  --breakout-max-width: var(--content-grid-breakout-max-width);
+
+  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.content-grid > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: content;
+}
+
+:where(.content-grid, .full-width) > .breakout {
+  grid-column: breakout;
+}
+
+:where(.content-grid, .full-width) > .full-width {
+  grid-column: full-width;
+}
+
+.content-grid > .full-width {
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+.flow > * + * {
+  margin-top: var(--spacing, var(--flow-spacing));
+}
+
+.section-padding {
+  padding-block: var(--section-padding-block);
+}
+
+/* Credit: Stephanie Eckles https://smolcss.dev/#smol-flexbox-grid */
+.responsive-flexbox-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--responsive-flexbox-layout-gap);
+}
+
+.responsive-flexbox-layout > * {
+  flex: 1 1 var(--responsive-flexbox-layout-item-min-width);
+}
+
+/* ==========================================================================
+   MARK: 🧪 Experiments
+   ========================================================================== */
+/* Forces dark header at page top for dark hero sections */
+.dark-top-header {
+  --duration: 0.25s;
+  color-scheme: dark;
+  background-color: var(--body-bg-color);
+
+  transition: background-color var(--duration) ease;
+}
+
+@container scroll-state(scrollable: top) {
+  .dark-top-header {
+    color-scheme: inherit;
+  }
+}
+
+/* 
+::view-transition-old(root) {
+  animation-delay: 500ms;
+}
+
+::view-transition-new(root) {
+  animation: circle-in 500ms;
+}
+
+@keyframes circle-in {
+  from {
+    clip-path: circle(0% at 95% 0%);
+  }
+  to {
+    clip-path: circle(140% at 95% 0%);
+  }
+} */
