@@ -1,0 +1,230 @@
+/* ==========================================================================
+   Design Tokens — Primitives (Raw Palette)
+   ========================================================================== */
+:root {
+  /* Font Families */
+  --ff-neo-grotesque: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+
+  /* Font Sizes (mobile) */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
+
+  /* Colors */
+  --gray-50: oklch(98% 0 0);
+  --gray-100: oklch(95% 0 0);
+  --gray-200: oklch(90% 0 0);
+  --gray-300: oklch(82% 0 0);
+  --gray-400: oklch(70% 0 0);
+  --gray-500: oklch(58% 0 0);
+  --gray-600: oklch(45% 0 0);
+  --gray-700: oklch(35% 0 0);
+  --gray-800: oklch(25% 0 0);
+  --gray-900: oklch(18% 0 0);
+
+  @media (min-width: 768px) {
+    /* Font Sizes (desktop) */
+    --font-size-xs: 0.875rem; /* 14px */
+    --font-size-sm: 1rem; /* 16px */
+    --font-size-base: 1.125rem; /* 18px */
+    --font-size-lg: 1.25rem; /* 20px */
+    --font-size-xl: 1.5rem; /* 24px */
+    --font-size-2xl: 2rem; /* 32px */
+    --font-size-3xl: 2.75rem; /* 44px */
+    --font-size-4xl: 3.75rem; /* 60px */
+    --font-size-5xl: 5rem; /* 80px */
+  }
+}
+
+/* ==========================================================================
+   Design Tokens — Semantic / Theme (Applied Context)
+   ========================================================================== */
+:root {
+  /* Sections */
+  --section-bg-color: light-dark(var(--gray-50), var(--gray-900));
+  --section-alternate-bg-color: light-dark(var(--gray-100), var(--gray-800));
+
+  /* Text */
+  --text-primary: light-dark(var(--gray-900), var(--gray-50));
+  --text-muted: light-dark(var(--gray-600), var(--gray-400));
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+body {
+  font-family: var(--ff-neo-grotesque);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  scroll-margin-top: 5rem;
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+}
+h2 {
+  font-size: var(--font-size-4xl);
+}
+h3 {
+  font-size: var(--font-size-3xl);
+}
+h4 {
+  font-size: var(--font-size-2xl);
+}
+h5 {
+  font-size: var(--font-size-xl);
+}
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+/* ==========================================================================
+   Component Defaults — single-consumer, tunable via matching local var
+   ========================================================================== */
+:root {
+  /* Sections */
+  --section-bg-image: none;
+
+  /* Images */
+  --hero-image-max-height: 45vh;
+
+  /* Layout */
+  --content-grid-padding-inline: 1rem;
+  --content-grid-content-max-width: 900px;
+  --content-grid-breakout-max-width: 1200px;
+  --flow-spacing: 1rem;
+  --section-padding-block: 2.5rem;
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+/* Credit: Kevin Powell https://codepen.io/kevinpowell/pen/QWxBgZX
+                        https://www.youtube.com/watch?v=qI5rXLJnxco */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0; /* remove default spacing */
+  padding: 0;
+  font: inherit; /* force styling of type through styling, rather than elements */
+}
+
+html {
+  color-scheme: dark light; /* dark mode user-agent-styles */
+  scrollbar-gutter: stable;
+}
+
+:root {
+  interpolate-size: allow-keywords; /* Allows transitioning to auto for example */
+}
+
+body {
+  min-block-size: 100svh; /* min body height */
+}
+
+/* responsive images/videos */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Credit: Harry Roberts https://x.com/csswizardry/status/1717841334462005661 */
+img {
+  background-image: var(--low-res, none);
+
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 0.75rem;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+section {
+  background-color: var(--section-bg-color, transparent);
+  background-image: var(--bg-image, var(--section-bg-image, none));
+  background-size: cover;
+  background-position: center;
+}
+
+section.alternate {
+  background-color: var(--section-alternate-bg-color, var(--alternate-bg-color, transparent));
+}
+
+/* ==========================================================================
+   Layout & Utilities
+   ========================================================================== */
+/* Credit: Kevin Powell https://codepen.io/kevinpowell/pen/ExrZrrw
+           Stephanie Eckles https://smolcss.dev/#smol-breakout-grid */
+.content-grid {
+  --padding-inline: var(--content-grid-padding-inline);
+  --content-max-width: var(--content-grid-content-max-width);
+  --breakout-max-width: var(--content-grid-breakout-max-width);
+
+  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.content-grid > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: content;
+}
+
+.content-grid > .breakout {
+  grid-column: breakout;
+}
+
+.content-grid > .full-width {
+  grid-column: full-width;
+
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+img.full-width {
+  width: 100%;
+  max-height: var(--max-height, var(--hero-image-max-height, 45vh));
+  object-fit: cover;
+}
+
+.flow > * + * {
+  margin-top: var(--spacing, var(--flow-spacing, 1rem));
+}
+
+.section-padding {
+  padding-block: var(--padding-block, var(--section-padding-block, 2.5rem));
+}
