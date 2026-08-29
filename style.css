@@ -62,6 +62,9 @@
 
   /* Buttons */
   --button-bg-color: transparent;
+
+  /* Navigation Bar */
+  --hamburger-menu-bg-color: var(--section-bg-color);
 }
 
 /* ==========================================================================
@@ -142,6 +145,13 @@ h6 {
   --navbar-padding-block: var(--space-s);
   --navbar-group-gap: var(--space-m);
   --navbar-links-gap: var(--space-m);
+
+  --hamburger-icon-size: 1.5rem;
+  --hamburger-line-thickness: 2px;
+  --hamburger-line-gap: var(--space-3xs);
+  --hamburger-menu-gap: var(--space-s);
+  --hamburger-menu-padding-inline: var(--navbar-padding-inline);
+  --hamburger-menu-padding-block: var(--space-m);
 
   /* Images */
   --symbol-image-height: 25vh;
