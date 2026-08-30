@@ -1,15 +1,19 @@
 const hamburgerBtn = document.querySelector('.hamburger');
 const hamburgerMenu = document.getElementById('mobile-menu');
 
+function setMenuOpen(open) {
+  hamburgerBtn.setAttribute('aria-expanded', String(open));
+  hamburgerMenu.hidden = !open;
+  document.documentElement.classList.toggle('menu-open', open);
+}
+
 function closeMenu() {
-  hamburgerBtn.setAttribute('aria-expanded', 'false');
-  hamburgerMenu.hidden = true;
+  setMenuOpen(false);
 }
 
 hamburgerBtn.addEventListener('click', () => {
   const isOpen = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-  hamburgerBtn.setAttribute('aria-expanded', String(!isOpen));
-  hamburgerMenu.hidden = isOpen;
+  setMenuOpen(!isOpen);
 });
 
 hamburgerMenu.addEventListener('click', (event) => {

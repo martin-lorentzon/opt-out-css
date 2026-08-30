@@ -354,6 +354,8 @@ img.full-width {
   align-items: center;
   padding-inline: var(--navbar-padding-inline);
   padding-block: var(--navbar-padding-block);
+  position: relative;
+  z-index: 1;
 }
 
 .left {
@@ -389,6 +391,10 @@ img.full-width {
 }
 
 /* Hamburger Menu for Mobile Devices */
+html.menu-open {
+  overflow: hidden;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -448,6 +454,10 @@ img.full-width {
   }
   .hamburger-menu:not([hidden]) {
     display: flex;
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    overflow-y: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {
