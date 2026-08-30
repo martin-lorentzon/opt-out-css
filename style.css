@@ -167,6 +167,12 @@ h6 {
   /* Buttons */
   --button-padding-inline: 0;
   --button-padding-block: 0;
+
+  /* Card */
+  --card-bg-color: var(--section-bg-color);
+  --card-padding-inline: var(--space-m);
+  --card-padding-block: var(--space-m);
+  --card-border-radius: 0.5rem;
 }
 
 /* ==========================================================================
@@ -523,6 +529,17 @@ html.menu-open {
 
 .responsive-flexbox-layout > * {
   flex: 1 1 var(--responsive-flexbox-layout-item-min-width);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.card {
+  background-color: var(--card-bg-color);
+  padding-inline: var(--card-padding-inline);
+  padding-block: var(--card-padding-block);
+  border-radius: var(--card-border-radius);
 }
 
 /* ==========================================================================
