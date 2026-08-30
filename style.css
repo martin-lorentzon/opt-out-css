@@ -342,7 +342,7 @@ img.full-width {
   max-height: var(--hero-image-max-height);
 }
 
-:where(.icon, [class^="icon-"], [class*=" icon-"], [class$="-icon"], [class*="-icon "]) {
+.icon {
   width: var(--icon-size);
   height: var(--icon-size);
   stroke-width: var(--icon-stroke-width);
