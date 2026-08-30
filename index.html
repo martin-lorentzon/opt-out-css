@@ -30,53 +30,21 @@
               <span class="hamburger-line"></span>
               <span class="hamburger-line"></span>
             </button>
-            <button type="button" id="theme-toggle" class="subtle-link" aria-label="Toggle dark mode">
-              <svg
-                id="dark-theme-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-moon-icon lucide-moon"
-              >
-                <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+            <button type="button" id="theme-toggle" aria-label="Toggle dark mode">
+              <svg id="dark-theme-icon" class="icon" aria-hidden="true" width="24" height="24">
+                <use href="#icon-moon"></use>
               </svg>
-              <svg
-                id="light-theme-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-sun-icon lucide-sun"
-              >
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2" />
-                <path d="M12 20v2" />
-                <path d="m4.93 4.93 1.41 1.41" />
-                <path d="m17.66 17.66 1.41 1.41" />
-                <path d="M2 12h2" />
-                <path d="M20 12h2" />
-                <path d="m6.34 17.66-1.41 1.41" />
-                <path d="m19.07 4.93-1.41 1.41" />
+              <svg id="light-theme-icon" class="icon hidden" aria-hidden="true" width="24" height="24">
+                <use href="#icon-sun"></use>
               </svg>
             </button>
           </div>
         </nav>
         <nav id="mobile-menu" class="hamburger-menu full-width" hidden>
           <ul class="hamburger-menu-links">
-            <li><a href="#" class="subtle-link">Home</a></li>
-            <li><a href="#" class="subtle-link">About</a></li>
-            <li><a href="#" class="subtle-link">Contact</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
           </ul>
         </nav>
       </header>
@@ -142,5 +110,15 @@
         </div>
       </section>
     </main>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+      </symbol>
+
+      <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+      </symbol>
+    </svg>
   </body>
 </html>
