@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opt-Out CSS — Bare Element Fixtures</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+    </script>
+    <script src="theme.js" defer></script>
+  </head>
+  <body>
+    <!--
+      Every element below is bare: no classes, no utility framework, no
+      build step. This page exists to verify the CONTRIBUTING.md promise
+      directly — that plain HTML looks good with zero classes — since
+      index.html's example markup has classes on everything and can't
+      catch a regression here. Toggle the button below for dark mode;
+      resize the window for the fluid clamp() scales.
+    -->
+    <main style="max-width: 70ch; margin-inline: auto; padding: var(--space-m, 1rem)">
+      <button id="theme-toggle">Toggle theme</button>
+
+      <section>
+        <h1>Heading level 1</h1>
+        <h2>Heading level 2</h2>
+        <h3>Heading level 3</h3>
+        <h4>Heading level 4</h4>
+        <h5>Heading level 5</h5>
+        <h6>Heading level 6</h6>
+      </section>
+
+      <section>
+        <h2>Paragraphs and inline text</h2>
+        <p>
+          A plain paragraph with <a href="#">a link</a>, some <strong>bold text</strong>,
+          <em>emphasized text</em>, <code>inline code</code>, <mark>marked text</mark>,
+          and <small>small print</small>.
+        </p>
+        <p>
+          A second paragraph to check spacing between consecutive paragraphs, followed
+          by a horizontal rule.
+        </p>
+        <hr />
+        <blockquote>
+          <p>A blockquote, for quoting someone else's words.</p>
+        </blockquote>
+        <pre><code>function example() {
+  return "a preformatted code block";
+}</code></pre>
+      </section>
+
+      <section>
+        <h2>Lists</h2>
+        <ul>
+          <li>Unordered item one</li>
+          <li>Unordered item two</li>
+          <li>Unordered item three with a nested list
+            <ul>
+              <li>Nested item one</li>
+              <li>Nested item two</li>
+            </ul>
+          </li>
+        </ul>
+        <ol>
+          <li>Ordered item one</li>
+          <li>Ordered item two</li>
+          <li>Ordered item three</li>
+        </ol>
+        <dl>
+          <dt>Term</dt>
+          <dd>Definition of the term.</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Table</h2>
+        <table>
+          <caption>Quarterly results</caption>
+          <thead>
+            <tr>
+              <th scope="col">Quarter</th>
+              <th scope="col">Revenue</th>
+              <th scope="col">Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Q1</th>
+              <td>$120,000</td>
+              <td>4%</td>
+            </tr>
+            <tr>
+              <th scope="row">Q2</th>
+              <td>$135,000</td>
+              <td>12%</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Form</h2>
+        <form>
+          <p>
+            <label for="fixture-name">Name</label><br />
+            <input id="fixture-name" type="text" placeholder="Jane Doe" />
+          </p>
+          <p>
+            <label for="fixture-email">Email</label><br />
+            <input id="fixture-email" type="email" placeholder="jane@example.com" />
+          </p>
+          <p>
+            <label for="fixture-message">Message</label><br />
+            <textarea id="fixture-message" rows="4" placeholder="Your message"></textarea>
+          </p>
+          <p>
+            <label for="fixture-topic">Topic</label><br />
+            <select id="fixture-topic">
+              <option>General inquiry</option>
+              <option>Support</option>
+              <option>Feedback</option>
+            </select>
+          </p>
+          <fieldset>
+            <legend>Preferences</legend>
+            <label><input type="checkbox" /> Subscribe to updates</label><br />
+            <label><input type="radio" name="fixture-contact" /> Email me</label><br />
+            <label><input type="radio" name="fixture-contact" /> Don't contact me</label>
+          </fieldset>
+          <p>
+            <button type="submit">Submit</button>
+            <button type="button">Cancel</button>
+            <button type="button" disabled>Disabled</button>
+          </p>
+        </form>
+      </section>
+
+      <section>
+        <h2>Media and disclosure</h2>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Abstract fluid design system art" />
+          <figcaption>A figure with a caption.</figcaption>
+        </figure>
+        <details>
+          <summary>Click to expand</summary>
+          <p>Hidden content revealed by a native disclosure widget.</p>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>
