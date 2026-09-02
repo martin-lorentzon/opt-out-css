@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opt-Out CSS</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="forms.css" />
     <script>
       const saved = localStorage.getItem("theme");
       if (saved) document.documentElement.setAttribute("data-theme", saved);
@@ -30,7 +31,7 @@
               <span class="hamburger-line"></span>
               <span class="hamburger-line"></span>
             </button>
-            <button type="button" id="theme-toggle" aria-label="Toggle dark mode">
+            <button type="button" id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">
               <svg id="dark-theme-icon" class="icon" aria-hidden="true">
                 <use href="#icon-moon"></use>
               </svg>

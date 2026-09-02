@@ -1,3 +1,7 @@
+/* Form control styling (input/textarea/select/checkbox/radio/fieldset) lives
+   in forms.css, which depends on the tokens defined here — load this file
+   first. */
+
 /* ==========================================================================
    MARK: ✒️ Design Tokens
    Primitives (Raw Palette)
@@ -43,6 +47,21 @@
   --gray-700: oklch(30.52% 0 0);
   --gray-800: oklch(20.9% 0 0);
   --gray-900: oklch(14.96% 0 0);
+
+  /* One-off error hue, not a full scale — nothing else in the palette needs
+     chroma yet, so this isn't generalized into a red-50..900 ramp */
+  --red-400: oklch(72% 0.17 25);
+  --red-500: oklch(55% 0.2 25);
+
+  /* One-off highlight hue, same reasoning as the error hue above */
+  --cyan-300: oklch(88% 0.09 200);
+  --cyan-600: oklch(45% 0.09 200);
+
+  /* Radii */
+  --radius-s: 0.25rem;
+  --radius-m: 0.5rem;
+  --radius-l: 1rem;
+  --radius-full: 999px;
 }
 
 /* ==========================================================================
@@ -60,8 +79,16 @@
   --text-primary: light-dark(var(--gray-900), var(--gray-50));
   --text-muted: light-dark(var(--gray-500), var(--gray-400));
 
+  /* Highlight */
+  --mark-bg-color: light-dark(var(--cyan-300), var(--cyan-600));
+
+  /* Borders */
+  --border-color-subtle: light-dark(var(--gray-200), var(--gray-700));
+
   /* Buttons */
-  --button-bg-color: transparent;
+  --button-bg-color: light-dark(var(--gray-800), var(--gray-100));
+  --button-bg-color-hover: light-dark(var(--gray-700), var(--gray-200));
+  --button-text-color: light-dark(var(--gray-50), var(--gray-900));
 
   /* Navigation Bar */
   --hamburger-menu-bg-color: var(--section-bg-color);
@@ -119,12 +146,8 @@ h6 {
   font-size: var(--font-size-lg);
 }
 
-.navbar {
-  font-family: var(--navbar-font-family);
-}
-
 /* ==========================================================================
-   MARK: ✨ Component Defaults 
+   MARK: ✨ Component Defaults
    Single-consumer, tunable via matching local var
    ========================================================================== */
 :root {
@@ -152,6 +175,7 @@ h6 {
   --hamburger-menu-gap: var(--space-s);
   --hamburger-menu-padding-inline: var(--navbar-padding-inline);
   --hamburger-menu-padding-block: var(--space-m);
+  --hamburger-line-border-radius: var(--radius-full);
 
   /* Images */
   --symbol-image-height: 25vh;
@@ -165,14 +189,29 @@ h6 {
   --icon-stroke-width: 2;
 
   /* Buttons */
-  --button-padding-inline: 0;
-  --button-padding-block: 0;
+  --button-font-size: var(--font-size-sm);
+  --button-padding-inline: var(--space-s);
+  --button-padding-block: var(--space-2xs);
+  --button-border-radius: var(--radius-full);
 
   /* Card */
   --card-bg-color: var(--section-bg-color);
   --card-padding-inline: var(--space-m);
   --card-padding-block: var(--space-m);
-  --card-border-radius: 0.5rem;
+  --card-border-radius: var(--radius-m);
+
+  /* Table */
+  --table-cell-padding-inline: var(--space-s);
+  --table-cell-padding-block: var(--space-2xs);
+}
+
+/* ==========================================================================
+   MARK: 🤝 Shared
+   Component-shaped defaults with more than one consumer
+   ========================================================================== */
+:root {
+  /* Consumed by buttons here and forms.css's form controls */
+  --disabled-opacity: 0.5;
 }
 
 /* ==========================================================================
@@ -236,23 +275,23 @@ video {
 }
 
 /* Credit: Stephanie Eckles https://css-tricks.com/standardizing-focus-styles-with-css-custom-properties/ */
-:is(a, button, input, textarea, summary) {
+:is(a, button, input, textarea, select, summary) {
   --outline-size: max(2px, 0.08em);
   --outline-style: solid;
   --outline-color: CanvasText;
 }
 
-:is(a, button, input, textarea, summary):focus {
+:is(a, button, input, textarea, select, summary):focus {
   outline: var(--outline-size) var(--outline-style) var(--outline-color);
   outline-offset: var(--outline-offset, var(--outline-size));
 }
 
-:is(a, button, input, textarea, summary):focus-visible {
+:is(a, button, input, textarea, select, summary):focus-visible {
   outline: var(--outline-size) var(--outline-style) var(--outline-color);
   outline-offset: var(--outline-offset, var(--outline-size));
 }
 
-:is(a, button, input, textarea, summary):focus:not(:focus-visible) {
+:is(a, button, input, textarea, select, summary):focus:not(:focus-visible) {
   outline: none;
 }
 
@@ -282,6 +321,11 @@ a {
   color: var(--text-primary);
 }
 
+mark {
+  background-color: var(--mark-bg-color);
+  color: var(--text-primary);
+}
+
 .subtle-link {
   text-decoration: none;
   color: var(--text-muted);
@@ -293,20 +337,71 @@ a {
 }
 
 button {
-  margin: 0;
-  padding: 0;
+  font-size: var(--button-font-size);
+  padding: var(--button-padding-block) var(--button-padding-inline);
   background-color: var(--button-bg-color);
+  color: var(--button-text-color);
   border: none;
+  border-radius: var(--button-border-radius);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-/* Icon-button-specific Layout */
-button:has(> svg) {
+button:hover {
+  background-color: var(--button-bg-color-hover);
+}
+
+button:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+/* Icon-only button: opts back out of the filled-button treatment above,
+   staying a plain glyph rather than a solid tappable block. Needs a class —
+   same precedent as .subtle-link over a bare `a` — because a button mixing
+   an icon with a text label is a common, legitimate shape that must keep
+   the default filled styling, so an svg child can't be used to infer it. */
+.icon-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   vertical-align: middle;
   line-height: 0;
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.icon-button:hover {
+  background-color: transparent;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  margin-block-end: var(--space-2xs);
+  color: var(--text-muted);
+  text-align: left;
+}
+
+th,
+td {
+  padding-inline: var(--table-cell-padding-inline);
+  padding-block: var(--table-cell-padding-block);
+  text-align: left;
+  border-block-end: 1px solid var(--border-color-subtle);
+}
+
+th {
+  font-weight: 600;
+}
+
+thead th {
+  background-color: var(--section-alternate-bg-color);
 }
 
 /* Theme Toggle Icon */
@@ -362,6 +457,7 @@ img.full-width {
   padding-block: var(--navbar-padding-block);
   position: relative;
   z-index: 1;
+  font-family: var(--navbar-font-family);
 }
 
 .left {
@@ -409,15 +505,13 @@ html.menu-open {
   width: var(--hamburger-icon-size);
   height: var(--hamburger-icon-size);
   padding: 0;
-  border: none;
   background: none;
   color: var(--text-primary);
-  cursor: pointer;
 }
 .hamburger-line {
   height: var(--hamburger-line-thickness);
   background-color: currentColor;
-  border-radius: 999px;
+  border-radius: var(--hamburger-line-border-radius);
   transition:
     transform 0.25s ease,
     opacity 0.25s ease;

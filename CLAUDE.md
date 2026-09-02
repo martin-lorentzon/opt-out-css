@@ -4,11 +4,12 @@ Zero-class CSS: plain HTML (`<h2>`, `<p>`, `<button>`, `<table>`, `<form>`, etc.
 
 ## Token architecture (mandatory)
 
-Every design decision lives in a custom property, in exactly one of three tiers — don't skip a layer or hardcode a value that belongs in one:
+Every design decision lives in a custom property, in exactly one of four tiers — don't skip a layer or hardcode a value that belongs in one:
 
 1. **Primitives** — raw, context-free values (`--gray-500`, `--space-m`).
 2. **Semantic** — what a primitive means in the theme (`--text-primary`). Only layer allowed to use `light-dark()` for color.
 3. **Component** — one consumer's tunable default (`--card-padding-inline`).
+4. **Shared** — a Component-shaped default with more than one real consumer (`--disabled-opacity`). Only move a token here once a second consumer actually exists, not speculatively.
 
 Name as `--{scope}-{property}[-{modifier}]`, kebab-case. Keep each tier in its matching block in [style.css](style.css), mirroring existing structure — don't append new rules to the bottom of the file; group under the existing `MARK:` section comments.
 

@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Opt-Out CSS — Forms
+   Split out of style.css for navigability. Depends on style.css loading
+   first: it reaches into the shared Primitives (--space-*, --gray-*,
+   --radius-*), Semantic tokens (--text-primary, --text-muted,
+   --border-color-subtle), and the --disabled-opacity Component default
+   shared with buttons.
+   ========================================================================== */
+
+/* ==========================================================================
+   MARK: ✒️ Design Tokens — Semantic / Theme (Applied Context)
+   ========================================================================== */
+:root {
+  --input-bg-color: light-dark(var(--gray-100), var(--gray-700));
+  --input-bg-color-focus: light-dark(var(--gray-200), var(--gray-600));
+  --input-invalid-border-color: light-dark(var(--red-500), var(--red-400));
+  --shadow-color: light-dark(oklch(0% 0 0 / 12%), oklch(0% 0 0 / 50%));
+  /* Baseline fallback: light-dark() only applies to <color>, so the two SVG
+     icon variants below are swapped per-theme the same way as the navbar's
+     dark/light icons (see style.css's Theme Toggle Icon). */
+  --select-arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238f8f8f' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  --checkbox-check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23f7f7f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --select-arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b8b8b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    --checkbox-check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23262626' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5'/%3E%3C/svg%3E");
+  }
+}
+
+:root[data-theme="dark"] {
+  --select-arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b8b8b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  --checkbox-check-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23262626' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   MARK: ✨ Component Defaults
+   Single-consumer, tunable via matching local var
+   ========================================================================== */
+:root {
+  --input-padding-inline: var(--space-xs);
+  --input-padding-block: var(--space-2xs);
+  --input-border-radius: var(--radius-s);
+  --input-border-width: 1px;
+  --checkbox-size: 1.25em;
+  --checkbox-border-radius: 0.2em;
+  --radio-border-width: 1px;
+  --radio-dot-inset: 0.25em;
+  --select-picker-shadow: 0 8px 24px var(--shadow-color);
+}
+
+/* ==========================================================================
+   MARK: 📋 Forms
+   ========================================================================== */
+:is(input, textarea, select) {
+  display: block;
+  width: 100%;
+  padding: var(--input-padding-block) var(--input-padding-inline);
+  background-color: var(--input-bg-color);
+  color: var(--text-primary);
+  border: var(--input-border-width) solid transparent;
+  border-radius: var(--input-border-radius);
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+}
+
+:is(input, textarea, select)::placeholder {
+  color: var(--text-muted);
+}
+
+:is(input, textarea, select):focus {
+  background-color: var(--input-bg-color-focus);
+}
+
+/* :user-invalid only flags a field after the user has interacted with it,
+   unlike :invalid which matches empty required fields immediately on load */
+:is(input, textarea, select):user-invalid {
+  border-color: var(--input-invalid-border-color);
+}
+
+:is(input, textarea, select):disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Replaces the native arrow so it doesn't carry its own browser/OS blue tint */
+select {
+  appearance: none;
+  padding-inline-end: var(--space-l);
+  background-image: var(--select-arrow-icon);
+  background-repeat: no-repeat;
+  background-position: right var(--space-2xs) center;
+  background-size: 1em;
+  cursor: pointer;
+}
+
+/* Progressive enhancement: the Customizable Select API (Chromium only as of
+   writing) exposes the open dropdown panel itself for styling. Without it,
+   the browser falls through to the plain `select` rule above and the popup
+   stays native/unstyled — there's no fallback branch to write, it's opt-in. */
+@supports (appearance: base-select) {
+  select {
+    appearance: base-select;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2xs);
+    padding-inline-end: var(--input-padding-inline);
+    background-image: none;
+  }
+
+  /* Overrides the UA's default disclosure-triangle glyph with our own SVG:
+     that glyph isn't drawn centered within its own box, which throws off
+     both its resting position and its rotation origin when toggled */
+  select::picker-icon {
+    content: var(--select-arrow-icon);
+    align-self: center;
+    margin: 0;
+    width: 1em;
+    height: 1em;
+    transform-origin: center;
+    transition: rotate 0.2s ease;
+  }
+
+  select:open::picker-icon {
+    rotate: 180deg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    select::picker-icon {
+      transition: none;
+    }
+  }
+
+  select::picker(select) {
+    appearance: base-select;
+    margin-block-start: var(--space-3xs);
+    padding: var(--space-3xs);
+    background-color: var(--input-bg-color);
+    color: var(--text-primary);
+    border: var(--input-border-width) solid var(--border-color-subtle);
+    border-radius: var(--input-border-radius);
+    box-shadow: var(--select-picker-shadow);
+  }
+
+  select option {
+    padding: var(--space-2xs);
+    border-radius: calc(var(--input-border-radius) - var(--input-border-width));
+  }
+
+  select option:not(:last-child) {
+    border-block-end: 1px solid var(--border-color-subtle);
+  }
+
+  select option:hover,
+  select option:focus-visible {
+    background-color: var(--input-bg-color-focus);
+  }
+
+  select option:checked {
+    background-color: var(--input-bg-color-focus);
+    font-weight: 600;
+  }
+}
+
+:is(input[type="checkbox"], input[type="radio"]) {
+  appearance: none;
+  display: inline-block;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  padding: 0;
+  vertical-align: middle;
+  background-color: var(--input-bg-color);
+  border: var(--input-border-width) solid var(--text-muted);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  border-radius: var(--checkbox-border-radius);
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+  border-width: var(--radio-border-width);
+}
+
+:is(input[type="checkbox"], input[type="radio"]):checked {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+input[type="checkbox"]:checked {
+  background-image: var(--checkbox-check-icon);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 65%;
+}
+
+/* Renders the selected dot by insetting a ring of the field's own
+   background color, rather than a separate SVG asset */
+input[type="radio"]:checked {
+  box-shadow: inset 0 0 0 var(--radio-dot-inset) var(--input-bg-color);
+}
+
+fieldset {
+  border: 1px solid var(--border-color-subtle);
+  border-radius: var(--input-border-radius);
+  padding: var(--space-s);
+}
+
+legend {
+  padding-inline: var(--space-3xs);
+  color: var(--text-muted);
+}

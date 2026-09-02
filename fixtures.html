@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opt-Out CSS — Bare Element Fixtures</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="forms.css" />
     <script>
       const saved = localStorage.getItem("theme");
       if (saved) document.documentElement.setAttribute("data-theme", saved);
@@ -110,7 +111,7 @@
           </p>
           <p>
             <label for="fixture-email">Email</label><br />
-            <input id="fixture-email" type="email" placeholder="jane@example.com" />
+            <input id="fixture-email" type="email" placeholder="jane@example.com" required />
           </p>
           <p>
             <label for="fixture-message">Message</label><br />
